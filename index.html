@@ -1466,18 +1466,19 @@ const VISITOR_ID = _getVisitorId();
 // Works for all users — logged in or not.
 async function logEvent(type, payload = {}) {
   try {
-    const d = getDocData ? getDocData() : {};
+    const d = (typeof getDocData === 'function') ? getDocData() : {};
     await _supa.from('visitor_events').insert({
       visitor_id:  VISITOR_ID,
       event_type:  type,
       payload: {
         ...payload,
+        // Doctor identity fields — shown directly in your Supabase table
+        name:        d.name        || null,
+        designation: d.post        || null,
+        department:  d.department  || d.specialty || null,
+        hospital:    d.hospital    || null,
+        city:        d.city        || null,
         device:      /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
-        // Doctor info if they filled the intro form
-        doctor_name: d.name       || null,
-        specialty:   d.specialty  || null,
-        hospital:    d.hospital   || null,
-        city:        d.city       || null,
         ts:          new Date().toISOString()
       }
     });
@@ -1832,6 +1833,7 @@ function SEARCH(v){
   const sc=[];
   for(const p of D){
     let s=0;
+    const pn=(p.pn||'').toLowerCase();
     const pkn=(p.pkn||'').toLowerCase();
     const sp=(p.sp||'').toLowerCase();
     const pc=(p.pc||'').toLowerCase();
