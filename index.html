@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>ArogyaCode — MJPJAY & PMJAY</title>
+<title>Yojana Sahayak — MJPJAY & PMJAY</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -957,7 +957,7 @@ mark{background:#fef08a;border-radius:3px;padding:0 2px;color:inherit}
   <div class="ob-wrap">
     <div class="ob-glow"></div><div class="ob-glow2"></div>
     <div class="ob-badge"><span></span>Official HBP 2022 Database</div>
-    <div class="ob-heading"><em>ArogyaCode</em><br>MJPJAY & PMJAY<br>Procedure Finder</div>
+    <div class="ob-heading"><em>Yojana Sahayak</em><br>MJPJAY & PMJAY<br>Procedure Finder</div>
     <div class="ob-sub">The complete reference tool for 2,685+ scheme procedures. Search instantly by name, code, disease, or specialty.</div>
     <div class="ob-tags">
       <span class="ob-tag">hernia repair</span>
@@ -1367,7 +1367,7 @@ mark{background:#fef08a;border-radius:3px;padding:0 2px;color:inherit}
           </div>
         </div>
 
-        <div class="acc-ver">ArogyaCode v2.0 · HBP 2022 · Build 2025</div>
+        <div class="acc-ver">Yojana Sahayak v2.0 · HBP 2022 · Build 2025</div>
 
       </div>
     </div>
@@ -1516,7 +1516,7 @@ function showView(id){
   ['lv-signin','lv-signup','lv-forgot','lv-newpw'].forEach(v=>{
     const el=document.getElementById(v);if(el)el.style.display=v===id?'block':'none';
   });
-  const titles={'lv-signin':'Welcome, Doctor','lv-signup':'Join ArogyaCode','lv-forgot':'Reset Password','lv-newpw':'Set New Password'};
+  const titles={'lv-signin':'Welcome, Doctor','lv-signup':'Join Yojana Sahayak','lv-forgot':'Reset Password','lv-newpw':'Set New Password'};
   const subs={'lv-signin':'Sign in to access your saved procedures','lv-signup':'Create your free account in seconds','lv-forgot':"We'll send you a reset link",'lv-newpw':'Choose a strong new password'};
   const th=document.getElementById('login-hero-title'),ts=document.getElementById('login-hero-sub');
   if(th&&titles[id])th.textContent=titles[id];
@@ -2035,7 +2035,7 @@ function UBC(){const el=document.getElementById('bm-count');if(el)el.textContent
 function SHP(code){
   const p=D.find(x=>x.pc===code);if(!p)return;
   const txt=`MJPJAY/PMJAY — ${p.pkn}\nCode: ${p.pc} | ${p.sc} | ${p.pkc}\nRate: ₹${Number(p.r||0).toLocaleString('en-IN')} | LOS: ${FL(p.los)}\nSpecialty: ${p.sp}`;
-  if(navigator.share)navigator.share({title:'ArogyaCode Procedure',text:txt});
+  if(navigator.share)navigator.share({title:'Yojana Sahayak Procedure',text:txt});
   else if(navigator.clipboard){navigator.clipboard.writeText(txt);alert('Copied!')}
 }
 
