@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>Yojana Sahayak — MJPJAY & PMJAY</title>
+<title>ArogyaCode — MJPJAY & PMJAY</title>
+
+<!-- ── PWA ── -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00b5a0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ArogyaCode">
+<link rel="apple-touch-icon" href="icon-192.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -957,7 +966,7 @@ mark{background:#fef08a;border-radius:3px;padding:0 2px;color:inherit}
   <div class="ob-wrap">
     <div class="ob-glow"></div><div class="ob-glow2"></div>
     <div class="ob-badge"><span></span>Official HBP 2022 Database</div>
-    <div class="ob-heading"><em>Yojana Sahayak</em><br>MJPJAY & PMJAY<br>Procedure Finder</div>
+    <div class="ob-heading"><em>ArogyaCode</em><br>MJPJAY & PMJAY<br>Procedure Finder</div>
     <div class="ob-sub">The complete reference tool for 2,685+ scheme procedures. Search instantly by name, code, disease, or specialty.</div>
     <div class="ob-tags">
       <span class="ob-tag">hernia repair</span>
@@ -1367,7 +1376,7 @@ mark{background:#fef08a;border-radius:3px;padding:0 2px;color:inherit}
           </div>
         </div>
 
-        <div class="acc-ver">Yojana Sahayak v2.0 · HBP 2022 · Build 2025</div>
+        <div class="acc-ver">ArogyaCode v2.0 · HBP 2022 · Build 2025</div>
 
       </div>
     </div>
@@ -1440,8 +1449,8 @@ function MAIN(){SCR('s-main');TAB('home');setTimeout(_refreshHomeGreet,50);}
 function DET(){SCR('s-det')}
 
 // ── SUPABASE AUTH ────────────────────────────────
-const SUPA_URL = 'https://ftmkjrkfmxxajomwduec.supabase.co';
-const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ0bWtqcmtmbXh4YWpvbXdkdWVjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNjk2OTIsImV4cCI6MjA4ODk0NTY5Mn0.ee3YUi1K6Vg86345RHPFlOcDFMcJzPOaFnH-MEIp5U8';
+const SUPA_URL = 'https://afqipfgtakjcrubbvltg.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcWlwZmd0YWtqY3J1YmJ2bHRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyOTI4MDksImV4cCI6MjA4ODg2ODgwOX0.YX96SUwr6nvdIHyjMPC9FfNoNR8CmhJt7YaO9LIj7aE';
 const _supa = supabase.createClient(SUPA_URL, SUPA_KEY);
 let _pendingCreds = null;
 let _supaSession = null;
@@ -1466,19 +1475,18 @@ const VISITOR_ID = _getVisitorId();
 // Works for all users — logged in or not.
 async function logEvent(type, payload = {}) {
   try {
-    const d = (typeof getDocData === 'function') ? getDocData() : {};
+    const d = getDocData ? getDocData() : {};
     await _supa.from('visitor_events').insert({
       visitor_id:  VISITOR_ID,
       event_type:  type,
       payload: {
         ...payload,
-        // Doctor identity fields — shown directly in your Supabase table
-        name:        d.name        || null,
-        designation: d.post        || null,
-        department:  d.department  || d.specialty || null,
-        hospital:    d.hospital    || null,
-        city:        d.city        || null,
         device:      /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
+        // Doctor info if they filled the intro form
+        doctor_name: d.name       || null,
+        specialty:   d.specialty  || null,
+        hospital:    d.hospital   || null,
+        city:        d.city       || null,
         ts:          new Date().toISOString()
       }
     });
@@ -1516,7 +1524,7 @@ function showView(id){
   ['lv-signin','lv-signup','lv-forgot','lv-newpw'].forEach(v=>{
     const el=document.getElementById(v);if(el)el.style.display=v===id?'block':'none';
   });
-  const titles={'lv-signin':'Welcome, Doctor','lv-signup':'Join Yojana Sahayak','lv-forgot':'Reset Password','lv-newpw':'Set New Password'};
+  const titles={'lv-signin':'Welcome, Doctor','lv-signup':'Join ArogyaCode','lv-forgot':'Reset Password','lv-newpw':'Set New Password'};
   const subs={'lv-signin':'Sign in to access your saved procedures','lv-signup':'Create your free account in seconds','lv-forgot':"We'll send you a reset link",'lv-newpw':'Choose a strong new password'};
   const th=document.getElementById('login-hero-title'),ts=document.getElementById('login-hero-sub');
   if(th&&titles[id])th.textContent=titles[id];
@@ -1833,7 +1841,6 @@ function SEARCH(v){
   const sc=[];
   for(const p of D){
     let s=0;
-    const pn=(p.pn||'').toLowerCase();
     const pkn=(p.pkn||'').toLowerCase();
     const sp=(p.sp||'').toLowerCase();
     const pc=(p.pc||'').toLowerCase();
@@ -2035,7 +2042,7 @@ function UBC(){const el=document.getElementById('bm-count');if(el)el.textContent
 function SHP(code){
   const p=D.find(x=>x.pc===code);if(!p)return;
   const txt=`MJPJAY/PMJAY — ${p.pkn}\nCode: ${p.pc} | ${p.sc} | ${p.pkc}\nRate: ₹${Number(p.r||0).toLocaleString('en-IN')} | LOS: ${FL(p.los)}\nSpecialty: ${p.sp}`;
-  if(navigator.share)navigator.share({title:'Yojana Sahayak Procedure',text:txt});
+  if(navigator.share)navigator.share({title:'ArogyaCode Procedure',text:txt});
   else if(navigator.clipboard){navigator.clipboard.writeText(txt);alert('Copied!')}
 }
 
@@ -2319,6 +2326,16 @@ function refreshAccStats(){
   },2500);
 })();
 /* ── END SPLASH SCREEN ── */
+
+/* ── PWA SERVICE WORKER REGISTRATION ── */
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('/Yojana-Sahayak-3.0/sw.js')
+      .then(function(){ console.log('ArogyaCode PWA ready'); })
+      .catch(function(e){ console.log('SW error:', e); });
+  });
+}
+/* ── END SERVICE WORKER ── */
 </script>
 </body>
 </html>
