@@ -840,6 +840,8 @@ button,
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* ─── ANIM ──────────────────────────────────────── */
@@ -1982,7 +1984,9 @@ function PC(p,q){
       <div class="pc-meta">⏱ ${EH(los)}</div>
       <div class="pc-rate">${r}<span>Tier 3</span></div>
     </div>`;
-  div.onclick=e=>{if(e.target.closest('.pc-bm'))return;OD(p.pc)};
+  const cardHandler=e=>{if(e.target.closest('.pc-bm'))return;OD(p.pc)};
+  div.addEventListener('touchend',function(e){if(e.target.closest('.pc-bm'))return;e.preventDefault();OD(p.pc);},{passive:false});
+  div.addEventListener('click',cardHandler);
   return div;
 }
 
@@ -2097,8 +2101,12 @@ function RRC(){
   wrap.innerHTML='';
   RS.slice(0,7).forEach(s=>{
     const c=document.createElement('div');
-    c.className='chip';c.innerHTML='🕐 '+EH(s);
-    c.onclick=()=>QK(s);wrap.appendChild(c);
+    c.className='chip';
+    c.innerHTML='🕐 '+EH(s);
+    const handler=()=>QK(s);
+    c.addEventListener('touchend',function(e){e.preventDefault();handler();},{passive:false});
+    c.addEventListener('click',handler);
+    wrap.appendChild(c);
   });
 }
 
@@ -2110,7 +2118,9 @@ function BSSG(){
     const c=document.createElement('div');
     c.className='spec-card';
     c.innerHTML=`<div class="spec-card-ic">${s.ic}</div><div class="spec-card-name">${s.name}</div><div class="spec-card-count">${cnt} procs</div>`;
-    c.onclick=()=>QK(s.name.toLowerCase());
+    const handler=()=>QK(s.name.toLowerCase());
+    c.addEventListener('touchend',function(e){e.preventDefault();handler();},{passive:false});
+    c.addEventListener('click',handler);
     grid.appendChild(c);
   });
 }
@@ -2125,12 +2135,14 @@ function IBR(){
     const b=document.createElement('div');
     b.className='sp-pill'+(s==='All'?' on':'');
     b.textContent=s;
-    b.onclick=()=>{
+    const handler=()=>{
       document.querySelectorAll('.sp-pill').forEach(x=>x.classList.remove('on'));
       b.classList.add('on');
       BS_SP=s==='All'?'all':s;
       ABF();
     };
+    b.addEventListener('touchend',function(e){e.preventDefault();handler();},{passive:false});
+    b.addEventListener('click',handler);
     wrap.appendChild(b);
   });
   ABF();
