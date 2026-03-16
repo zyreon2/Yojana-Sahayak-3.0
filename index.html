@@ -1479,8 +1479,8 @@ function MAIN(){SCR('s-main');TAB('home');setTimeout(_refreshHomeGreet,50);}
 function DET(){SCR('s-det')}
 
 // ── SUPABASE AUTH ────────────────────────────────
-const SUPA_URL = 'https://afqipfgtakjcrubbvltg.supabase.co';
-const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcWlwZmd0YWtqY3J1YmJ2bHRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMyOTI4MDksImV4cCI6MjA4ODg2ODgwOX0.YX96SUwr6nvdIHyjMPC9FfNoNR8CmhJt7YaO9LIj7aE';
+const SUPA_URL = 'https://ftmkjrkfmxxajomwduec.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ0bWtqcmtmbXh4YWpvbXdkdWVjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNjk2OTIsImV4cCI6MjA4ODk0NTY5Mn0.ee3YUi1K6Vg86345RHPFlOcDFMcJzPOaFnH-MEIp5U8';
 const _supa = supabase.createClient(SUPA_URL, SUPA_KEY);
 let _pendingCreds = null;
 let _supaSession = null;
@@ -1505,18 +1505,18 @@ const VISITOR_ID = _getVisitorId();
 // Works for all users — logged in or not.
 async function logEvent(type, payload = {}) {
   try {
-    const d = getDocData ? getDocData() : {};
+    const d = (typeof getDocData === 'function') ? getDocData() : {};
     await _supa.from('visitor_events').insert({
       visitor_id:  VISITOR_ID,
       event_type:  type,
       payload: {
         ...payload,
+        name:        d.name        || null,
+        designation: d.post        || null,
+        department:  d.department  || d.specialty || null,
+        hospital:    d.hospital    || null,
+        city:        d.city        || null,
         device:      /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop',
-        // Doctor info if they filled the intro form
-        doctor_name: d.name       || null,
-        specialty:   d.specialty  || null,
-        hospital:    d.hospital   || null,
-        city:        d.city       || null,
         ts:          new Date().toISOString()
       }
     });
@@ -2372,7 +2372,7 @@ function refreshAccStats(){
 if('serviceWorker' in navigator){
   window.addEventListener('load', function(){
     navigator.serviceWorker.register('/Yojana-Sahayak-3.0/sw.js')
-      .then(function(){ console.log('Yojana Sahayak PWA ready'); })
+      .then(function(){ console.log('ArogyaCode PWA ready'); })
       .catch(function(e){ console.log('SW error:', e); });
   });
 }
