@@ -815,32 +815,36 @@ mark{background:#fef08a;border-radius:3px;padding:0 2px;color:inherit}
 .edit-mode .acc-field-ic{background:#fef9c3}
 
 /* ─── BUTTON ELEMENT RESETS ─────────────────────── */
-/* Spec cards, chips and pills are now <button> elements  */
-/* This removes all default browser button styling       */
+/* Spec cards, chips, pills and procedure cards are  */
+/* now <button> elements for reliable mobile tapping */
 button.spec-card,
 button.chip,
 button.sp-pill,
 button.pc {
   font-family: 'Sora', sans-serif;
-  font-size: inherit;
-  border: none;
-  outline: none;
-  background: none;
-  padding: 0;
-  margin: 0;
-  text-align: left;
-  width: 100%;
-  display: block;
   -webkit-appearance: none;
   appearance: none;
 }
+/* spec-card as button — restore grid cell sizing */
+button.spec-card {
+  width: 100%;
+  text-align: center;
+}
+/* chip as button — restore inline-flex */
 button.chip {
   display: inline-flex;
   width: auto;
 }
+/* sp-pill as button — restore inline sizing */
 button.sp-pill {
   display: inline-block;
   width: auto;
+}
+/* pc as button — restore full-width block card */
+button.pc {
+  width: 100%;
+  text-align: left;
+  display: block;
 }
 
 /* ─── MOBILE TOUCH FIX ──────────────────────────── */
@@ -2397,7 +2401,7 @@ function refreshAccStats(){
 if('serviceWorker' in navigator){
   window.addEventListener('load', function(){
     navigator.serviceWorker.register('/Yojana-Sahayak-3.0/sw.js')
-      .then(function(){ console.log('Yojana Sahayak PWA ready'); })
+      .then(function(){ console.log('ArogyaCode PWA ready'); })
       .catch(function(e){ console.log('SW error:', e); });
   });
 }
