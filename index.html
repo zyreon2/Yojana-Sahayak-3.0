@@ -814,6 +814,34 @@ mark{background:#fef08a;border-radius:3px;padding:0 2px;color:inherit}
 .edit-mode .acc-field{background:#fffbf0}
 .edit-mode .acc-field-ic{background:#fef9c3}
 
+/* ─── MOBILE TOUCH FIX ──────────────────────────── */
+/* Removes 300ms tap delay that silently blocks buttons on mobile */
+button,
+.chip,
+.spec-card,
+.ti,
+.pc,
+.pc-bm,
+.btn-cta,
+.btn-ghost,
+.btn-login,
+.btn-bm,
+.btn-sh,
+.load-more-btn,
+.ob-dot,
+.det-back,
+.sp-pill,
+.notif-card,
+.acc-avatar,
+.acc-edit-btn,
+.home-notif-btn,
+.search-x,
+[onclick]{
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
 /* ─── ANIM ──────────────────────────────────────── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .fu{animation:fadeUp .25s ease both}
@@ -1376,7 +1404,7 @@ mark{background:#fef08a;border-radius:3px;padding:0 2px;color:inherit}
           </div>
         </div>
 
-        <div class="acc-ver">ArogyaCode v2.0 · HBP 2022 · Build 2025</div>
+        <div class="acc-ver">Yojana Sahayak v2.0 · HBP 2022 · Build 2025</div>
 
       </div>
     </div>
