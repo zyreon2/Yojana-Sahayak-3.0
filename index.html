@@ -814,6 +814,35 @@ mark{background:#fef08a;border-radius:3px;padding:0 2px;color:inherit}
 .edit-mode .acc-field{background:#fffbf0}
 .edit-mode .acc-field-ic{background:#fef9c3}
 
+/* ─── BUTTON ELEMENT RESETS ─────────────────────── */
+/* Spec cards, chips and pills are now <button> elements  */
+/* This removes all default browser button styling       */
+button.spec-card,
+button.chip,
+button.sp-pill,
+button.pc {
+  font-family: 'Sora', sans-serif;
+  font-size: inherit;
+  border: none;
+  outline: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  width: 100%;
+  display: block;
+  -webkit-appearance: none;
+  appearance: none;
+}
+button.chip {
+  display: inline-flex;
+  width: auto;
+}
+button.sp-pill {
+  display: inline-block;
+  width: auto;
+}
+
 /* ─── MOBILE TOUCH FIX ──────────────────────────── */
 /* Removes 300ms tap delay that silently blocks buttons on mobile */
 button,
@@ -1961,7 +1990,8 @@ function FL(l){
 }
 
 function PC(p,q){
-  const div=document.createElement('div');
+  const div=document.createElement('button');
+  div.type='button';
   div.className='pc fu';
   const bm=BMS.has(p.pc);
   const r=FR(p.r);const los=FL(p.los);
@@ -1984,9 +2014,7 @@ function PC(p,q){
       <div class="pc-meta">⏱ ${EH(los)}</div>
       <div class="pc-rate">${r}<span>Tier 3</span></div>
     </div>`;
-  const cardHandler=e=>{if(e.target.closest('.pc-bm'))return;OD(p.pc)};
-  div.addEventListener('touchend',function(e){if(e.target.closest('.pc-bm'))return;e.preventDefault();OD(p.pc);},{passive:false});
-  div.addEventListener('click',cardHandler);
+  div.onclick=e=>{if(e.target.closest('.pc-bm'))return;OD(p.pc)};
   return div;
 }
 
@@ -2100,12 +2128,11 @@ function RRC(){
   if(!wrap)return;
   wrap.innerHTML='';
   RS.slice(0,7).forEach(s=>{
-    const c=document.createElement('div');
+    const c=document.createElement('button');
+    c.type='button';
     c.className='chip';
     c.innerHTML='🕐 '+EH(s);
-    const handler=()=>QK(s);
-    c.addEventListener('touchend',function(e){e.preventDefault();handler();},{passive:false});
-    c.addEventListener('click',handler);
+    c.onclick=()=>QK(s);
     wrap.appendChild(c);
   });
 }
@@ -2115,12 +2142,11 @@ function BSSG(){
   if(!grid)return;
   SPEC_DATA.forEach(s=>{
     const cnt=D.filter(p=>p.sc===s.sc||p.sp.toLowerCase().includes(s.sp.toLowerCase())).length;
-    const c=document.createElement('div');
+    const c=document.createElement('button');
+    c.type='button';
     c.className='spec-card';
     c.innerHTML=`<div class="spec-card-ic">${s.ic}</div><div class="spec-card-name">${s.name}</div><div class="spec-card-count">${cnt} procs</div>`;
-    const handler=()=>QK(s.name.toLowerCase());
-    c.addEventListener('touchend',function(e){e.preventDefault();handler();},{passive:false});
-    c.addEventListener('click',handler);
+    c.onclick=()=>QK(s.name.toLowerCase());
     grid.appendChild(c);
   });
 }
@@ -2132,17 +2158,16 @@ function IBR(){
   const wrap=document.getElementById('br-pills');
   if(!wrap)return;
   BR_SPECS.forEach(s=>{
-    const b=document.createElement('div');
+    const b=document.createElement('button');
+    b.type='button';
     b.className='sp-pill'+(s==='All'?' on':'');
     b.textContent=s;
-    const handler=()=>{
+    b.onclick=()=>{
       document.querySelectorAll('.sp-pill').forEach(x=>x.classList.remove('on'));
       b.classList.add('on');
       BS_SP=s==='All'?'all':s;
       ABF();
     };
-    b.addEventListener('touchend',function(e){e.preventDefault();handler();},{passive:false});
-    b.addEventListener('click',handler);
     wrap.appendChild(b);
   });
   ABF();
@@ -2372,7 +2397,7 @@ function refreshAccStats(){
 if('serviceWorker' in navigator){
   window.addEventListener('load', function(){
     navigator.serviceWorker.register('/Yojana-Sahayak-3.0/sw.js')
-      .then(function(){ console.log('ArogyaCode PWA ready'); })
+      .then(function(){ console.log('Yojana Sahayak PWA ready'); })
       .catch(function(e){ console.log('SW error:', e); });
   });
 }
