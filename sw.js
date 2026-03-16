@@ -1,5 +1,5 @@
 /* ─── ArogyaCode Service Worker ─────────────────── */
-const CACHE = 'yojana-sahayak-v1';
+const CACHE = 'yojana-sahayak-v2';
 
 const PRECACHE = [
   '/Yojana-Sahayak-3.0/',
