@@ -2713,7 +2713,7 @@ async function FBSubmit(){
 
   try {
     // Save to Supabase — table: pilot_feedback
-    const { data, error } = await _supabase
+    const { data, error } = await _supa
       .from('pilot_feedback')
       .insert([payload]);
 
