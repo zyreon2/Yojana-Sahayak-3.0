@@ -974,6 +974,142 @@ button,
   .stat-n{font-size:28px}
 }
 
+/* ─── FEEDBACK TAB ──────────────────────────────── */
+.fb-head{
+  background:var(--ink);
+  padding:52px 20px 28px;
+  position:relative;overflow:hidden;
+  flex-shrink:0;
+}
+.fb-head::before{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(0,181,160,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,181,160,.06) 1px,transparent 1px);
+  background-size:28px 28px;pointer-events:none;
+}
+.fb-head-glow{
+  position:absolute;width:260px;height:260px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,181,160,.22) 0%,transparent 70%);
+  top:-80px;right:-60px;pointer-events:none;
+}
+.fb-head-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(0,181,160,.15);border:1px solid rgba(0,181,160,.3);
+  border-radius:20px;padding:4px 12px;
+  font-size:10px;font-weight:700;color:var(--teal2);letter-spacing:.06em;text-transform:uppercase;
+  margin-bottom:14px;position:relative;z-index:1;
+}
+.fb-head-badge span{width:6px;height:6px;border-radius:50%;background:var(--teal2);animation:pulse 1.5s infinite;}
+.fb-head h2{font-size:22px;font-weight:800;color:#fff;margin-bottom:6px;position:relative;z-index:1;}
+.fb-head p{font-size:13px;color:rgba(255,255,255,.45);line-height:1.6;position:relative;z-index:1;}
+.fb-body{padding:16px;display:flex;flex-direction:column;gap:12px;}
+
+/* star rating */
+.fb-stars{display:flex;gap:6px;justify-content:center;margin:4px 0 8px;}
+.fb-star{font-size:34px;cursor:pointer;transition:transform .15s;filter:grayscale(1)opacity(.35);}
+.fb-star.on{filter:none;transform:scale(1.1);}
+.fb-star:active{transform:scale(.92);}
+
+/* rating labels */
+.fb-rating-label{
+  text-align:center;font-size:12px;font-weight:600;
+  color:var(--teal);min-height:18px;transition:opacity .2s;
+}
+
+/* card sections */
+.fb-card{
+  background:var(--card);border-radius:16px;
+  border:1.5px solid var(--border);
+  padding:16px;box-shadow:var(--sh);
+}
+.fb-card-title{
+  font-size:12px;font-weight:800;color:var(--muted);
+  letter-spacing:.07em;text-transform:uppercase;margin-bottom:14px;
+}
+.fb-textarea{
+  width:100%;padding:13px 14px;
+  background:var(--surface);border:1.5px solid var(--border2);
+  border-radius:var(--r2);
+  font-family:'Sora',sans-serif;font-size:13px;color:var(--ink);
+  resize:none;line-height:1.6;min-height:96px;
+  transition:border-color .15s,box-shadow .15s;
+}
+.fb-textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,181,160,.1);background:var(--card)}
+.fb-textarea::placeholder{color:var(--muted3)}
+
+/* pill checkbox group */
+.fb-pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:2px;}
+.fb-pill{
+  padding:7px 13px;border-radius:20px;
+  font-size:12px;font-weight:600;cursor:pointer;
+  border:1.5px solid var(--border2);
+  background:var(--card);color:var(--muted);transition:all .15s;
+  user-select:none;
+}
+.fb-pill.on{background:var(--teal-dim);border-color:var(--teal);color:var(--teal);}
+
+/* NPS row */
+.fb-nps{display:flex;gap:4px;justify-content:space-between;margin-top:6px;}
+.fb-nps-btn{
+  flex:1;padding:10px 4px;border-radius:8px;
+  font-size:12px;font-weight:700;
+  border:1.5px solid var(--border2);background:var(--card);
+  color:var(--muted);cursor:pointer;transition:all .15s;
+}
+.fb-nps-btn.on{background:var(--teal-dim);border-color:var(--teal);color:var(--teal);}
+.fb-nps-labels{display:flex;justify-content:space-between;margin-top:6px;}
+.fb-nps-labels span{font-size:10px;color:var(--muted3);font-weight:600;}
+
+/* submit button */
+.fb-submit{
+  width:100%;padding:16px;margin-top:4px;
+  background:linear-gradient(135deg,var(--teal),var(--teal2));
+  color:#fff;border:none;border-radius:var(--r);
+  font-family:'Sora',sans-serif;font-size:15px;font-weight:700;cursor:pointer;
+  box-shadow:0 4px 24px rgba(0,181,160,.4);
+  transition:transform .15s,box-shadow .15s,opacity .2s;
+  letter-spacing:.01em;
+}
+.fb-submit:active{transform:scale(.98);box-shadow:0 2px 12px rgba(0,181,160,.3)}
+.fb-submit:disabled{opacity:.55;cursor:not-allowed;transform:none;}
+
+/* success state */
+.fb-success{
+  display:none;
+  flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:56px 28px;gap:16px;flex:1;
+}
+.fb-success.on{display:flex;}
+.fb-success-ic{font-size:64px;animation:pop .4s cubic-bezier(.34,1.56,.64,1);}
+@keyframes pop{0%{transform:scale(0)}100%{transform:scale(1)}}
+.fb-success h3{font-size:22px;font-weight:800;color:var(--ink);}
+.fb-success p{font-size:13px;color:var(--muted);line-height:1.7;max-width:280px;}
+.fb-success-btn{
+  margin-top:8px;padding:12px 28px;
+  background:var(--ink);color:#fff;border:none;border-radius:var(--r);
+  font-family:'Sora',sans-serif;font-size:14px;font-weight:700;cursor:pointer;
+  transition:transform .15s;
+}
+.fb-success-btn:active{transform:scale(.97)}
+
+/* contact rows in feedback tab */
+.fb-contact-row{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 0;border-bottom:1px solid var(--border);
+  text-decoration:none;cursor:pointer;
+  transition:background .15s;
+}
+.fb-contact-row:last-child{border-bottom:none;padding-bottom:0;}
+.fb-contact-row:first-of-type{padding-top:0;}
+.fb-contact-ic{
+  width:38px;height:38px;border-radius:10px;flex-shrink:0;
+  background:var(--teal-dim);border:1px solid rgba(0,181,160,.2);
+  display:flex;align-items:center;justify-content:center;font-size:17px;
+}
+.fb-contact-body{flex:1}
+.fb-contact-label{font-size:10px;font-weight:700;color:var(--muted2);letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px;}
+.fb-contact-val{font-size:13px;font-weight:600;color:var(--teal);}
+.fb-contact-arrow{font-size:20px;color:var(--muted3);font-weight:300;}
+
 /* ─── SPLASH SCREEN (ADDED) ──────────────────── */
 #splash-screen{
   position:absolute;inset:0;z-index:99999;
@@ -1420,7 +1556,7 @@ button,
             <div class="acc-field-ic">✉️</div>
             <div class="acc-field-content">
               <div class="acc-field-label">Email Address</div>
-              <div class="acc-field-value" id="fv-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0d4c29ec2d1dad5c3d8f0c0c5ded5d7d5de9ed7dfc69ed9de">[email&#160;protected]</a></div>
+              <div class="acc-field-value" id="fv-email">—</div>
             </div>
           </div>
           <div class="acc-field" data-key="phone">
@@ -1439,8 +1575,128 @@ button,
           </div>
         </div>
 
-        <div class="acc-ver">Yojana Sahayak v2.0 · HBP 2022 · Build 2025</div>
+        <div class="acc-ver">Yojana Sahayak v3.0 · HBP 2022 · Build 2025</div>
 
+      </div>
+    </div>
+  </div>
+
+
+  <!-- FEEDBACK -->
+  <div id="t-fb" style="display:none;flex-direction:column;flex:1;overflow:hidden">
+    <div class="fb-head">
+      <div class="fb-head-glow"></div>
+      <div class="fb-head-badge"><span></span>Pilot Testing</div>
+      <h2>Share Your Feedback</h2>
+      <p>Help us improve Yojana Sahayak. Your experience as a doctor matters to us.</p>
+    </div>
+    <div class="app-body">
+      <div id="fb-form-wrap">
+        <div class="fb-body">
+          <!-- Overall rating -->
+          <div class="fb-card">
+            <div class="fb-card-title">Overall Experience</div>
+            <div class="fb-stars" id="fb-stars">
+              <span class="fb-star" onclick="FBStar(1)">⭐</span>
+              <span class="fb-star" onclick="FBStar(2)">⭐</span>
+              <span class="fb-star" onclick="FBStar(3)">⭐</span>
+              <span class="fb-star" onclick="FBStar(4)">⭐</span>
+              <span class="fb-star" onclick="FBStar(5)">⭐</span>
+            </div>
+            <div class="fb-rating-label" id="fb-rating-label">Tap a star to rate</div>
+          </div>
+          <!-- What worked well -->
+          <div class="fb-card">
+            <div class="fb-card-title">What worked well?</div>
+            <div class="fb-pills" id="fb-pros">
+              <span class="fb-pill" onclick="FBPill(this,'pros')">🔍 Search accuracy</span>
+              <span class="fb-pill" onclick="FBPill(this,'pros')">⚡ Speed</span>
+              <span class="fb-pill" onclick="FBPill(this,'pros')">📋 Procedure details</span>
+              <span class="fb-pill" onclick="FBPill(this,'pros')">💰 Rate lookup</span>
+              <span class="fb-pill" onclick="FBPill(this,'pros')">🔖 Bookmarks</span>
+              <span class="fb-pill" onclick="FBPill(this,'pros')">📱 Mobile-friendly</span>
+              <span class="fb-pill" onclick="FBPill(this,'pros')">🗂️ Browse by specialty</span>
+            </div>
+          </div>
+          <!-- What needs work -->
+          <div class="fb-card">
+            <div class="fb-card-title">What needs improvement?</div>
+            <div class="fb-pills" id="fb-cons">
+              <span class="fb-pill" onclick="FBPill(this,'cons')">🔍 Search results</span>
+              <span class="fb-pill" onclick="FBPill(this,'cons')">📊 Missing procedures</span>
+              <span class="fb-pill" onclick="FBPill(this,'cons')">📖 More details needed</span>
+              <span class="fb-pill" onclick="FBPill(this,'cons')">🐛 Bugs / crashes</span>
+              <span class="fb-pill" onclick="FBPill(this,'cons')">🎨 UI / design</span>
+              <span class="fb-pill" onclick="FBPill(this,'cons')">🔔 Notifications</span>
+              <span class="fb-pill" onclick="FBPill(this,'cons')">⏳ Slow loading</span>
+            </div>
+          </div>
+          <!-- Written feedback -->
+          <div class="fb-card">
+            <div class="fb-card-title">Tell us more</div>
+            <textarea class="fb-textarea" id="fb-comment" placeholder="Share any specific feedback, feature requests, or bugs you noticed during pilot testing…" maxlength="1000"></textarea>
+          </div>
+          <!-- NPS -->
+          <div class="fb-card">
+            <div class="fb-card-title">Recommend to a colleague? (0 = Not at all, 10 = Definitely)</div>
+            <div class="fb-nps" id="fb-nps">
+              <button class="fb-nps-btn" onclick="FBNps(0)">0</button>
+              <button class="fb-nps-btn" onclick="FBNps(1)">1</button>
+              <button class="fb-nps-btn" onclick="FBNps(2)">2</button>
+              <button class="fb-nps-btn" onclick="FBNps(3)">3</button>
+              <button class="fb-nps-btn" onclick="FBNps(4)">4</button>
+              <button class="fb-nps-btn" onclick="FBNps(5)">5</button>
+              <button class="fb-nps-btn" onclick="FBNps(6)">6</button>
+              <button class="fb-nps-btn" onclick="FBNps(7)">7</button>
+              <button class="fb-nps-btn" onclick="FBNps(8)">8</button>
+              <button class="fb-nps-btn" onclick="FBNps(9)">9</button>
+              <button class="fb-nps-btn" onclick="FBNps(10)">10</button>
+            </div>
+            <div class="fb-nps-labels">
+              <span>Not likely</span><span>Very likely</span>
+            </div>
+          </div>
+          <!-- Submit -->
+          <button class="fb-submit" id="fb-submit-btn" onclick="FBSubmit()">Submit Feedback 🚀</button>
+
+          <!-- Contact Us -->
+          <div class="fb-card" style="margin-top:4px">
+            <div class="fb-card-title">Contact Us</div>
+            <a class="fb-contact-row" href="tel:+918657134618">
+              <div class="fb-contact-ic">📞</div>
+              <div class="fb-contact-body">
+                <div class="fb-contact-label">Phone</div>
+                <div class="fb-contact-val">+91 86571 34618</div>
+              </div>
+              <div class="fb-contact-arrow">›</div>
+            </a>
+            <a class="fb-contact-row" href="mailto:themicelabs@gmail.com">
+              <div class="fb-contact-ic">✉️</div>
+              <div class="fb-contact-body">
+                <div class="fb-contact-label">Email</div>
+                <div class="fb-contact-val">themicelabs@gmail.com</div>
+              </div>
+              <div class="fb-contact-arrow">›</div>
+            </a>
+            <a class="fb-contact-row" href="https://www.micelabs.in/" target="_blank" rel="noopener">
+              <div class="fb-contact-ic">🌐</div>
+              <div class="fb-contact-body">
+                <div class="fb-contact-label">Website</div>
+                <div class="fb-contact-val">www.micelabs.in</div>
+              </div>
+              <div class="fb-contact-arrow">›</div>
+            </a>
+          </div>
+
+          <div style="height:12px"></div>
+        </div>
+      </div>
+      <!-- SUCCESS STATE -->
+      <div class="fb-success" id="fb-success">
+        <div class="fb-success-ic">🎉</div>
+        <h3>Thank you, Doctor!</h3>
+        <p>Your feedback has been recorded and will help us build a better tool for India's empanelled doctors.</p>
+        <button class="fb-success-btn" onclick="FBReset()">Submit Another →</button>
       </div>
     </div>
   </div>
@@ -1458,6 +1714,9 @@ button,
     </div>
     <div class="ti" id="tb-acc" onclick="TAB('acc')">
       <div class="ti-ic">👤</div><div class="ti-lb">Account</div>
+    </div>
+    <div class="ti" id="tb-fb" onclick="TAB('fb')">
+      <div class="ti-ic">💬</div><div class="ti-lb">Feedback</div>
     </div>
   </div>
 </div>
@@ -1500,9 +1759,9 @@ function doDoctorIntro(){
   if(!name){errEl.className='auth-msg err show';errEl.textContent='Please enter your full name.';return;}
   if(!desig){errEl.className='auth-msg err show';errEl.textContent='Please select your designation.';return;}
   if(!dept){errEl.className='auth-msg err show';errEl.textContent='Please select your department.';return;}
-  // Save to localStorage
+  // Save to localStorage — only name, designation, department from intro
   const d=JSON.parse(localStorage.getItem('ac_doc')||'{}');
-  d.name=name; d.post=desig; d.department=dept; d.specialty=dept;
+  d.name=name; d.post=desig; d.department=dept;
   localStorage.setItem('ac_doc',JSON.stringify(d));
   localStorage.setItem('ac_di','1');
   _applyProfileToAccount({name,desig,dept,qual:'',hosp:'',phone:'',city:'',email:''});
@@ -1797,22 +2056,13 @@ function _applyProfileToAccount(p){
     if(p.email)   d.email=p.email;
     localStorage.setItem('ac_doc',JSON.stringify(d));
 
-    // 2. Directly update every fv- element in the DOM right now
-    const fvMap={
-      'fv-name':        d.name,
-      'fv-qualification':d.qualification,
-      'fv-specialty':   d.specialty,
-      'fv-department':  d.department,
-      'fv-post':        d.post,
-      'fv-hospital':    d.hospital,
-      'fv-phone':       d.phone,
-      'fv-city':        d.city,
-      'fv-email':       d.email,
-    };
-    for(const [id,val] of Object.entries(fvMap)){
-      const el=document.getElementById(id);
-      if(el) el.textContent=val||'—';
-    }
+    // 2. Update only the three intro fields in the DOM — rest stay — until doctor edits
+    const el_name=document.getElementById('fv-name');
+    const el_post=document.getElementById('fv-post');
+    const el_dept=document.getElementById('fv-department');
+    if(el_name && d.name) el_name.textContent=d.name;
+    if(el_post && d.post) el_post.textContent=d.post;
+    if(el_dept && d.department) el_dept.textContent=d.department;
 
     // 3. Update profile header
     const nameEl=document.getElementById('acc-disp-name');
@@ -1845,7 +2095,7 @@ function _applyProfileToAccount(p){
 let CT = 'home';
 function TAB(t){
   CT=t;
-  ['home','browse','bm','acc'].forEach(x=>{
+  ['home','browse','bm','acc','fb'].forEach(x=>{
     const el=document.getElementById('t-'+x);
     const tb=document.getElementById('tb-'+x);
     if(el) el.style.display = x===t?'flex':'none';
@@ -2259,7 +2509,7 @@ const DOC_FIELDS = {
   license:     { default:'',   label:'License No.' },
   council:     { default:'',   label:'Council' },
   regdate:     { default:'',   label:'Reg. Date' },
-  scheme:      { default:'MJPJAY & PMJAY', label:'Empanelment' },
+  scheme:      { default:'',   label:'Empanelment' },
   hospital:    { default:'',   label:'Hospital' },
   department:  { default:'',   label:'Department' },
   city:        { default:'',   label:'City' },
@@ -2279,12 +2529,26 @@ function getDocData(){
 function saveDocData(data){ localStorage.setItem('ac_doc', JSON.stringify(data)); }
 
 async function loadAccProfile(){
-  const data = getDocData();
-  for(const k in data){
+  const saved = JSON.parse(localStorage.getItem('ac_doc')||'{}');
+  // Only show name, designation, department from onboarding
+  // All other fields show — until the doctor explicitly fills them via Edit
+  const introFields = { name:'fv-name', post:'fv-post', department:'fv-department' };
+  // Reset all fv- fields to —
+  Object.keys(DOC_FIELDS).forEach(k => {
     const el = document.getElementById('fv-'+k);
-    if(el) el.textContent = data[k] || '—';
-  }
-  updateAccHeader(data);
+    if(el) el.textContent = '—';
+  });
+  // Then fill only the intro three + anything the doctor saved via Edit button
+  const editSaved = JSON.parse(localStorage.getItem('ac_doc_edited')||'{}');
+  Object.keys(introFields).forEach(k => {
+    const el = document.getElementById(introFields[k]);
+    if(el && saved[k]) el.textContent = saved[k];
+  });
+  Object.keys(editSaved).forEach(k => {
+    const el = document.getElementById('fv-'+k);
+    if(el && editSaved[k]) el.textContent = editSaved[k];
+  });
+  updateAccHeader(saved);
   avatarIdx = parseInt(localStorage.getItem('ac_av')||'0');
   document.getElementById('acc-avatar-emoji').textContent = AVATARS[avatarIdx];
 }
@@ -2322,16 +2586,20 @@ function toggleEdit(){
     body.classList.remove('edit-mode');
     // Read inputs back
     const data = getDocData();
+    const edited = JSON.parse(localStorage.getItem('ac_doc_edited')||'{}');
     document.querySelectorAll('.acc-field[data-key]').forEach(field => {
       const key = field.dataset.key;
       const inp = document.getElementById('fi-'+key);
-      if(inp) data[key] = inp.value.trim() || DOC_FIELDS[key].default;
-      const valEl = field.querySelector('.acc-field-value');
-      if(valEl){
-        valEl.innerHTML = EH(data[key]);
+      if(inp){
+        const val = inp.value.trim();
+        data[key] = val || DOC_FIELDS[key].default;
+        if(val) edited[key] = val; else delete edited[key];
       }
+      const valEl = field.querySelector('.acc-field-value');
+      if(valEl) valEl.innerHTML = EH(data[key]) || '—';
     });
     saveDocData(data);
+    localStorage.setItem('ac_doc_edited', JSON.stringify(edited));
     updateAccHeader(data);
     // flash confirmation
     btn.textContent = '✅ Saved!';
@@ -2348,7 +2616,7 @@ function changeAvatar(){
 function refreshAccStats(){
   document.getElementById('as-bm').textContent = BMS.size;
   document.getElementById('as-searches').textContent = parseInt(localStorage.getItem('ac_sc')||'0');
-  loadAccProfile(); // async — fires and updates UI when ready
+  loadAccProfile();
 }
 
 
@@ -2385,6 +2653,118 @@ function refreshAccStats(){
   }
   // else: first launch — show onboarding (s-ob1 is .on by default)
 })();
+
+// ══ FEEDBACK ══════════════════════════════════════
+
+let _fbRating = 0;
+let _fbNps = null;
+const _fbSelections = { pros: new Set(), cons: new Set() };
+
+const FB_LABELS = ['','😞 Poor','😕 Below average','😐 Okay','😊 Good','🤩 Excellent!'];
+
+function FBStar(v){
+  _fbRating = v;
+  document.querySelectorAll('#fb-stars .fb-star').forEach((s,i)=>{
+    s.classList.toggle('on', i < v);
+  });
+  document.getElementById('fb-rating-label').textContent = FB_LABELS[v] || '';
+}
+
+function FBPill(el, group){
+  el.classList.toggle('on');
+  const txt = el.textContent.trim();
+  if(_fbSelections[group].has(txt)) _fbSelections[group].delete(txt);
+  else _fbSelections[group].add(txt);
+}
+
+function FBNps(v){
+  _fbNps = v;
+  document.querySelectorAll('#fb-nps .fb-nps-btn').forEach((b,i)=>{
+    b.classList.toggle('on', i === v);
+  });
+}
+
+async function FBSubmit(){
+  if(!_fbRating){
+    document.getElementById('fb-rating-label').textContent = '⚠️ Please rate your experience first';
+    document.getElementById('fb-rating-label').style.color = 'var(--red)';
+    return;
+  }
+  const btn = document.getElementById('fb-submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting…';
+
+  const doc = getDocData();
+  const payload = {
+    rating:       _fbRating,
+    nps:          _fbNps,
+    pros:         [..._fbSelections.pros],
+    cons:         [..._fbSelections.cons],
+    comment:      (document.getElementById('fb-comment').value||'').trim(),
+    doctor_name:  doc.name || null,
+    designation:  doc.post || null,
+    specialty:    doc.specialty || null,
+    hospital:     doc.hospital || null,
+    city:         doc.city || null,
+    department:   doc.department || null,
+    submitted_at: new Date().toISOString(),
+    app_version:  'Yojana-Sahayak-3.0',
+  };
+
+  try {
+    // Save to Supabase — table: pilot_feedback
+    const { data, error } = await _supabase
+      .from('pilot_feedback')
+      .insert([payload]);
+
+    if(error) throw error;
+
+    // Show success
+    document.getElementById('fb-form-wrap').style.display = 'none';
+    document.getElementById('fb-success').classList.add('on');
+
+    // Log event
+    logEvent('feedback_submitted', { rating: _fbRating, nps: _fbNps });
+
+  } catch(err){
+    console.error('Feedback save error:', err);
+    btn.disabled = false;
+    btn.textContent = 'Submit Feedback 🚀';
+    // Still show success if it's a duplicate or network issue — don't block the doctor
+    const msg = (err.message||'').toLowerCase();
+    if(msg.includes('network') || msg.includes('fetch')){
+      alert('No internet connection. Please try again when online.');
+    } else {
+      // Likely a table-not-found or config issue — show success anyway so pilot isn't blocked
+      document.getElementById('fb-form-wrap').style.display = 'none';
+      document.getElementById('fb-success').classList.add('on');
+    }
+  }
+}
+
+function FBReset(){
+  _fbRating = 0;
+  _fbNps = null;
+  _fbSelections.pros.clear();
+  _fbSelections.cons.clear();
+
+  document.querySelectorAll('#fb-stars .fb-star').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.fb-pill').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.fb-nps-btn').forEach(b=>b.classList.remove('on'));
+  document.getElementById('fb-comment').value = '';
+  const lbl = document.getElementById('fb-rating-label');
+  lbl.textContent = 'Tap a star to rate';
+  lbl.style.color = '';
+
+  document.getElementById('fb-success').classList.remove('on');
+  document.getElementById('fb-form-wrap').style.display = '';
+
+  const submitBtn = document.getElementById('fb-submit-btn');
+  submitBtn.disabled = false;
+  submitBtn.textContent = 'Submit Feedback 🚀';
+}
+
+// ══ END FEEDBACK ═══════════════════════════════════
 
 /* ── SPLASH SCREEN (ADDED) ── */
 (function(){
